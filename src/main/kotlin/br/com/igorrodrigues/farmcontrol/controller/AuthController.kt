@@ -4,8 +4,8 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-class LoginController {
+class AuthController {
 
-    @GetMapping("/")
+    @GetMapping("/auth")
     fun teste() ="Hello World, welcome!"
 }
