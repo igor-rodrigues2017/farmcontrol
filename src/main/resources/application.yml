@@ -1,0 +1,21 @@
+#Config database
+spring:
+  datasource:
+    plataform: postgres
+    url: jdbc:postgresql://localhost:5432/farm_control
+    username: postgres
+    password: postgres
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    format-sql: true
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  main:
+    allow-bean-definition-overriding: true
+
+  #Dev-tools
+  devtools:
+    restart:
+      poll-interval: 2s
+      quiet-period: 1s
