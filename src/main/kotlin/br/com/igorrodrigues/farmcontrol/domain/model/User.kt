@@ -1,13 +1,15 @@
 package br.com.igorrodrigues.farmcontrol.domain.model
 
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
+import com.fasterxml.jackson.annotation.JsonIgnore
+import javax.persistence.*
 
-data class User(
+@Entity
+@Table(name = "users")
+data class User (
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         val id: Long = 0,
         val email: String = "",
+        @JsonIgnore
         val password: String = ""
 )
