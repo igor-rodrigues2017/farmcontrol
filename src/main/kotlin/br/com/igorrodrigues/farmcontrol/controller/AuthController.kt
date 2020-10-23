@@ -1,6 +1,5 @@
 package br.com.igorrodrigues.farmcontrol.controller
 
-import br.com.igorrodrigues.farmcontrol.domain.model.User
 import br.com.igorrodrigues.farmcontrol.domain.useCase.CreateUserUseCase
 import br.com.igorrodrigues.farmcontrol.domain.useCase.UserDto
 import org.springframework.beans.factory.annotation.Autowired
@@ -17,7 +16,5 @@ class AuthController {
     private lateinit var createUserUseCase: CreateUserUseCase
 
     @PostMapping("/signin")
-    fun signin(@RequestBody userDto: UserDto): ResponseEntity<User> {
-        return ResponseEntity.status(CREATED).body(createUserUseCase.create(userDto))
-    }
+    fun signin(@RequestBody userDto: UserDto) = createUserUseCase.create(userDto).let { ResponseEntity.status(CREATED).body(it) }
 }
