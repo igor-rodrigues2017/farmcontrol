@@ -39,7 +39,7 @@ internal class AuthControllerTest {
             content = jacksonObjectMapper().writeValueAsString(userDto)
             accept = APPLICATION_JSON
         }.andExpect {
-            status { isCreated }
+            status { isCreated() }
             content { contentType(APPLICATION_JSON) }
             content { json("""
                 {

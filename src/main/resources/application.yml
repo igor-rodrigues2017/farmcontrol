@@ -1,5 +1,5 @@
-#Config database
 spring:
+  #Config database
   datasource:
     plataform: postgres
     url: jdbc:postgresql://localhost:5432/farm_control
@@ -19,3 +19,8 @@ spring:
     restart:
       poll-interval: 2s
       quiet-period: 1s
+
+#JWT
+jwt:
+  secret: L2ZNrKdwnpt9SAU9k2uUZAQLvfsV8TZXVD32qwg8dfssnUGsoVjs
+  expiration: 1800000

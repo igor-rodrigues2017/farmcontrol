@@ -15,6 +15,6 @@ class AuthController {
     @Autowired
     private lateinit var createUserUseCase: CreateUserUseCase
 
-    @PostMapping("/signin")
+    @PostMapping("/signup")
     fun signin(@RequestBody userDto: UserDto) = createUserUseCase.create(userDto).let { ResponseEntity.status(CREATED).body(it) }
 }
