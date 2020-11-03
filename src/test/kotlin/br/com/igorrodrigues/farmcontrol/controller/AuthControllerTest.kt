@@ -50,4 +50,10 @@ internal class AuthControllerTest {
         }
         verify(createUserUseCase).create(userDto)
     }
+
+    //TODO: Make this test!
+    @Test
+    internal fun `should return a new token`() {
+
+    }
 }

@@ -49,4 +49,10 @@ internal class TokenServiceTest {
         assertFalse(TokenService(expiration = 18000, secret = SECRET).isValidToken("eyJhbGciOiJIUzI1NgJ9.eyJpc3viOiJBUEkgLSBGYXJtQ29udHJvbCIsImlhdCI6MTYwNDM2MDQ2MSwic3ViIjoidGVzdEB0xXNrLJNvbSIsImV4cCI6MTYwNDM2MDQ3OX0.Y5R4G8fTGmRcZkPDcgWbgpd6rcdPGCtNhmrxeY2HrGE"))
     }
 
+    @Test
+    internal fun `should retrieve user name from a token`() {
+        val tokenService = TokenService(expiration = 18000, secret = SECRET)
+        val token = tokenService.generateToken(authenticate)
+        assertThat(tokenService.getUserName(token), equalTo(EMAIL))
+    }
 }

@@ -34,5 +34,6 @@ class TokenService(
 
     }
 
+    fun getUserName(token: String) = Jwts.parser().setSigningKey(secret).parseClaimsJws(token).body.subject
 
 }
