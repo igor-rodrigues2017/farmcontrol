@@ -13,15 +13,17 @@ class TokenService(
         @Value("\${jwt.secret}") private val secret: String,
 ) {
 
-    fun generateToken(authenticate: Authentication): String {
+    fun generateToken(authenticate: Authentication): TokenDto {
         val user = authenticate.principal as Credentials
-        return user.let { Jwts.builder()
+        return Jwts.builder()
                 .setIssuer("API - FarmControl")
                 .setIssuedAt(Date())
-                .setSubject(it.username)
+                .setSubject(user.username)
                 .setExpiration(Date(Date().time + expiration))
                 .signWith(SignatureAlgorithm.HS256, secret)
-                .compact() }
+                .compact().let {
+                    TokenDto(value = it)
+                }
     }
 
     fun isValidToken(token: String): Boolean {

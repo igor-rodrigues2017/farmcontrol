@@ -3,10 +3,12 @@ package br.com.igorrodrigues.farmcontrol.controller
 import br.com.igorrodrigues.farmcontrol.domain.model.User
 import br.com.igorrodrigues.farmcontrol.domain.useCase.CreateUserUseCase
 import br.com.igorrodrigues.farmcontrol.domain.useCase.UserDto
+import br.com.igorrodrigues.farmcontrol.infrastructure.security.TokenDto
 import br.com.igorrodrigues.farmcontrol.infrastructure.security.TokenService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus.CREATED
 import org.springframework.http.HttpStatus.OK
+import org.springframework.http.MediaType.APPLICATION_JSON
 import org.springframework.http.ResponseEntity
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
@@ -27,15 +29,23 @@ class AuthController {
 
     @PostMapping("/signup")
     fun signin(@RequestBody userDto: UserDto): ResponseEntity<User> {
+        encryptPassword(userDto)
+        return createUserUseCase.create(userDto).let {
+            ResponseEntity
+                .status(CREATED)
+                    .contentType(APPLICATION_JSON)
+                    .body(it)
+        }
+    }
+
+    private fun encryptPassword(userDto: UserDto) {
         userDto.password = BCryptPasswordEncoder().encode(userDto.password)
-        return createUserUseCase.create(userDto).let { ResponseEntity.status(CREATED).body(it) }
     }
 
     @PostMapping("/auth")
-    fun authenticate(@RequestBody userDto: UserDto): ResponseEntity<String> {
+    fun authenticate(@RequestBody userDto: UserDto): ResponseEntity<TokenDto> {
         val usernamePasswordAuthenticationToken = UsernamePasswordAuthenticationToken(userDto.email, userDto.password)
         val authenticate = authenticationManager.authenticate(usernamePasswordAuthenticationToken)
-        val token = tokenService.generateToken(authenticate)
-        return ResponseEntity.status(OK).body(token)
+        return tokenService.generateToken(authenticate).let { ResponseEntity.status(OK).body(it) }
     }
 }

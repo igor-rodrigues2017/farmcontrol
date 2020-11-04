@@ -32,7 +32,7 @@ internal class TokenServiceTest {
     @Test
     internal fun `should generate a valid token`() {
         val token = TokenService(expiration = 18000, secret = SECRET).generateToken(authenticate)
-        val claims = Jwts.parser().setSigningKey(SECRET).parseClaimsJws(token).body
+        val claims = Jwts.parser().setSigningKey(SECRET).parseClaimsJws(token.value).body
         assertThat(claims.subject, equalTo(EMAIL))
         assertThat(claims.issuer, equalTo("API - FarmControl"))
     }
@@ -41,7 +41,7 @@ internal class TokenServiceTest {
     internal fun `should validate a valid token`() {
         val tokenService = TokenService(expiration = 18000, secret = SECRET)
         val token = tokenService.generateToken(authenticate)
-        assertTrue(tokenService.isValidToken(token))
+        assertTrue(tokenService.isValidToken(token.value))
     }
 
     @Test
@@ -53,6 +53,6 @@ internal class TokenServiceTest {
     internal fun `should retrieve user name from a token`() {
         val tokenService = TokenService(expiration = 18000, secret = SECRET)
         val token = tokenService.generateToken(authenticate)
-        assertThat(tokenService.getUserName(token), equalTo(EMAIL))
+        assertThat(tokenService.getUserName(token.value), equalTo(EMAIL))
     }
 }
