@@ -51,7 +51,7 @@ jobs:
           name: wait for db
           command: dockerize -wait tcp://localhost:5432 -timeout 1m
       - run: sudo apt update && sudo apt install postgresql-client
-      - run: psql -U postgres -c "create database farmcontrol;"
+      - run: psql -U postgres -c "create database farm_control;"
 
       # run tests!
       - run: gradle test
