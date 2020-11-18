@@ -30,8 +30,8 @@ class AuthenticationTokenFilter(
     private fun retriveToken(request: HttpServletRequest): String {
         return request.getHeader("Authorization").let {
             when {
-                it.isNullOrEmpty() -> "INVALID"
-                else -> it
+                it.isNullOrEmpty() || !it.startsWith("Bearer") -> "INVALID"
+                else -> it.substring(6)
             }
         }
     }

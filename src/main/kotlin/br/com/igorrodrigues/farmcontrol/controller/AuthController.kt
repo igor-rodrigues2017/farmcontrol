@@ -44,8 +44,10 @@ class AuthController {
 
     @PostMapping("/auth")
     fun authenticate(@RequestBody userDto: UserDto): ResponseEntity<TokenDto> {
-        val usernamePasswordAuthenticationToken = UsernamePasswordAuthenticationToken(userDto.email, userDto.password)
-        val authenticate = authenticationManager.authenticate(usernamePasswordAuthenticationToken)
+        val authenticate = authenticationManager.authenticate(UsernamePasswordAuthenticationToken(
+                userDto.email,
+                userDto.password
+        ))
         return tokenService.generateToken(authenticate).let { ResponseEntity.status(OK).body(it) }
     }
 }

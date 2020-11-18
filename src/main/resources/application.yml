@@ -22,5 +22,5 @@ spring:
 
 #JWT
 jwt:
-  secret: L2ZNrKdwnpt9SAU9k2uUZAQLvfsV8TZXVD32qwg8dfssnUGsoVjs
+  secret: secret
   expiration: 1800000
