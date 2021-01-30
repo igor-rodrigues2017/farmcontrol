@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository
 @Repository
 class AllUserAdapter(private val repository: AllUserRepository): AllUser {
     override fun save(user: User) = repository.save(user)
-    override fun withEmail(email: String): User = repository.findByEmail(email)?.let { it } ?: throw UserNotFoundException()
+    override fun withEmail(email: String): User = repository.findByEmail(email) ?: throw UserNotFoundException()
 }
