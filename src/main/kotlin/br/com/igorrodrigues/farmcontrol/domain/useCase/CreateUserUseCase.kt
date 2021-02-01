@@ -15,5 +15,3 @@ class CreateUserUseCase(@Autowired private val allUser: AllUser) {
 
     class UserAlreadyExistentException : RuntimeException("User already existent")
 }
-
-
