@@ -1,8 +1,8 @@
 package br.com.igorrodrigues.farmcontrol.controller
 
 import br.com.igorrodrigues.farmcontrol.domain.model.User
-import br.com.igorrodrigues.farmcontrol.domain.useCase.CreateUserUseCase
-import br.com.igorrodrigues.farmcontrol.domain.useCase.UserDto
+import br.com.igorrodrigues.farmcontrol.domain.usecase.CreateUserUseCase
+import br.com.igorrodrigues.farmcontrol.domain.usecase.UserDto
 import br.com.igorrodrigues.farmcontrol.infrastructure.security.TokenDto
 import br.com.igorrodrigues.farmcontrol.infrastructure.security.TokenService
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper

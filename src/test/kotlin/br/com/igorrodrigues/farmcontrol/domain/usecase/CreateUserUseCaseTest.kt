@@ -1,4 +1,4 @@
-package br.com.igorrodrigues.farmcontrol.domain.useCase
+package br.com.igorrodrigues.farmcontrol.domain.usecase
 
 import br.com.igorrodrigues.farmcontrol.domain.model.AllUser
 import br.com.igorrodrigues.farmcontrol.domain.model.User
