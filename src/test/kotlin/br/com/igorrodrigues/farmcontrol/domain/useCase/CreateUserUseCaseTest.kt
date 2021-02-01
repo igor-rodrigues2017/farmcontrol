@@ -46,7 +46,7 @@ class CreateUserUseCaseTest {
     @Test
     internal fun `should not persist a new user when user already exist`() {
         val emailAlreadyExistents = "existent@user.com"
-        `when`(allUser.withEmail(emailAlreadyExistents)).thenReturn(User(1, emailAlreadyExistents, PASSWORD))
+        `when`(allUser.userAlreadyExist(emailAlreadyExistents)).thenReturn(true)
         assertThrows(CreateUserUseCase.UserAlreadyExistentException::class.java) {
             CreateUserUseCase(allUser).create(UserDto(emailAlreadyExistents, PASSWORD))
         }
