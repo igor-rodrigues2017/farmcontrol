@@ -21,6 +21,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication
 import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.springframework.test.web.servlet.MockMvc
+import org.springframework.test.web.servlet.get
 import org.springframework.test.web.servlet.post
 
 @AutoConfigureMockMvc
@@ -83,7 +84,7 @@ internal class AuthControllerTest {
         ))).thenReturn(authentication)
         val tokenDto = TokenDto("Token Válido")
         `when`(tokenService.generateToken(authentication)).thenReturn(tokenDto)
-        mockMvc.post("/auth") {
+        mockMvc.get("/auth") {
             contentType = APPLICATION_JSON
             content = jacksonObjectMapper().writeValueAsString(userDto)
             accept = APPLICATION_JSON

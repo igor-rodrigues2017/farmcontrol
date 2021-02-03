@@ -3,6 +3,7 @@ package br.com.igorrodrigues.farmcontrol.infrastructure.security
 import br.com.igorrodrigues.farmcontrol.domain.model.AllUser
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.http.HttpMethod.GET
 import org.springframework.http.HttpMethod.POST
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
@@ -29,7 +30,7 @@ class ConfigSecurity(
             sessionManagement { sessionCreationPolicy = STATELESS }
             authorizeRequests {
                 authorize(POST,"/signup", permitAll)
-                authorize(POST,"/auth", permitAll)
+                authorize(GET,"/auth", permitAll)
                 authorize(anyRequest, authenticated)
             }
             addFilterBefore(AuthenticationTokenFilter(tokenService, allUser), UsernamePasswordAuthenticationFilter::class.java)
@@ -42,7 +43,7 @@ class ConfigSecurity(
     }
 
     override fun configure(auth: AuthenticationManagerBuilder?) {
-        auth?.let { it.userDetailsService(authService).passwordEncoder(BCryptPasswordEncoder()) }
+        auth?.userDetailsService(authService)?.passwordEncoder(BCryptPasswordEncoder())
     }
 
 }
