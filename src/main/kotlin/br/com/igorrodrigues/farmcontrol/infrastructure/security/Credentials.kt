@@ -12,6 +12,8 @@ class Credentials(private val user: User): UserDetails {
 
     override fun getUsername() = user.email
 
+    fun getUserId() = user.id
+
     override fun isAccountNonExpired() = true
 
     override fun isAccountNonLocked() = true
