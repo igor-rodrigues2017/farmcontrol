@@ -14,7 +14,7 @@ class AuthenticationTokenFilter(
 ): OncePerRequestFilter() {
 
     override fun doFilterInternal(request: HttpServletRequest, response: HttpServletResponse, filterChain: FilterChain) {
-        val token = retriveToken(request)
+        val token = retrieveToken(request)
         authenticateUser(token)
         filterChain.doFilter(request, response)
     }
@@ -27,7 +27,7 @@ class AuthenticationTokenFilter(
         }
     }
 
-    private fun retriveToken(request: HttpServletRequest): String {
+    private fun retrieveToken(request: HttpServletRequest): String {
         return request.getHeader("Authorization").let {
             when {
                 it.isNullOrEmpty() || !it.startsWith("Bearer") -> "INVALID"

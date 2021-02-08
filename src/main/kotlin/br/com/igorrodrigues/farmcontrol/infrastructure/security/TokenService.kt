@@ -19,7 +19,7 @@ class TokenService(
                 .setIssuer("API - FarmControl")
                 .setIssuedAt(Date())
                 .setSubject(user.username)
-                .setExpiration(Date(Date().time + expiration))
+                .setId(user.getUserId().toString()).setExpiration(Date(Date().time + expiration))
                 .signWith(SignatureAlgorithm.HS256, secret)
                 .compact().let {
                     TokenDto(value = it)

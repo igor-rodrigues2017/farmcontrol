@@ -26,7 +26,7 @@ internal class TokenServiceTest {
     @BeforeEach
     internal fun setUp() {
         MockitoAnnotations.openMocks(this)
-        `when`(authenticate.principal).thenReturn(Credentials(User(email = EMAIL, password = "1234")))
+        `when`(authenticate.principal).thenReturn(Credentials(User(email = EMAIL, password = "1234", id = 1)))
     }
 
     @Test
@@ -35,6 +35,7 @@ internal class TokenServiceTest {
         val claims = Jwts.parser().setSigningKey(SECRET).parseClaimsJws(token.value).body
         assertThat(claims.subject, equalTo(EMAIL))
         assertThat(claims.issuer, equalTo("API - FarmControl"))
+        assertThat(claims.id, equalTo("1"))
     }
 
     @Test

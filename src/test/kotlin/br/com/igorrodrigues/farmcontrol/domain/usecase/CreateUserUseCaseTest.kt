@@ -19,6 +19,11 @@ class CreateUserUseCaseTest {
     @Mock
     private lateinit var allUser: AllUser
 
+    @Mock
+    private lateinit var tenantService: TenantService
+
+    private lateinit var useCase: CreateUserUseCase
+
     @BeforeEach
     private fun init() {
         openMocks(this)
@@ -28,11 +33,12 @@ class CreateUserUseCaseTest {
                 email = EMAIL,
                 password = PASSWORD
         ))
+        useCase = CreateUserUseCase(allUser, tenantService)
     }
 
     @Test
-    fun `should persist a new user`() {
-        CreateUserUseCase(allUser).create(UserDto(
+    fun `should persist a new user and create a new schema for this user`() {
+        useCase.create(UserDto(
                 EMAIL,
                 PASSWORD
         ))
@@ -41,6 +47,7 @@ class CreateUserUseCaseTest {
                 email = EMAIL,
                 password = "1234"
         ))
+        verify(tenantService).initDatabase(EMAIL)
     }
 
     @Test
@@ -48,7 +55,7 @@ class CreateUserUseCaseTest {
         val emailAlreadyExistents = "existent@user.com"
         `when`(allUser.userAlreadyExist(emailAlreadyExistents)).thenReturn(true)
         assertThrows(CreateUserUseCase.UserAlreadyExistentException::class.java) {
-            CreateUserUseCase(allUser).create(UserDto(emailAlreadyExistents, PASSWORD))
+            useCase.create(UserDto(emailAlreadyExistents, PASSWORD))
         }
     }
 }
