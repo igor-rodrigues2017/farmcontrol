@@ -5,7 +5,6 @@ import br.com.igorrodrigues.farmcontrol.domain.usecase.CreateUserUseCase
 import br.com.igorrodrigues.farmcontrol.domain.usecase.UserDto
 import br.com.igorrodrigues.farmcontrol.infrastructure.security.TokenDto
 import br.com.igorrodrigues.farmcontrol.infrastructure.security.TokenService
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus.CREATED
 import org.springframework.http.HttpStatus.OK
 import org.springframework.http.MediaType.APPLICATION_JSON
@@ -19,14 +18,9 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-class AuthController {
-
-    @Autowired
-    private lateinit var createUserUseCase: CreateUserUseCase
-    @Autowired
-    private lateinit var authenticationManager: AuthenticationManager
-    @Autowired
-    private lateinit var tokenService: TokenService
+class AuthController(private val createUserUseCase: CreateUserUseCase,
+                     private val authenticationManager: AuthenticationManager,
+                     private val tokenService: TokenService) {
 
     @PostMapping("/signup")
     fun signin(@RequestBody userDto: UserDto): ResponseEntity<User> {
