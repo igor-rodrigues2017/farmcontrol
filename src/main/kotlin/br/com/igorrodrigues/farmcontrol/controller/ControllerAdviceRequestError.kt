@@ -1,6 +1,6 @@
 package br.com.igorrodrigues.farmcontrol.controller
 
-import br.com.igorrodrigues.farmcontrol.domain.usecase.CreateUserUseCase
+import br.com.igorrodrigues.farmcontrol.domain.usecase.user.CreateUserUseCase
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ControllerAdvice
