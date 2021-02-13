@@ -4,7 +4,7 @@ import br.com.igorrodrigues.farmcontrol.domain.model.user.User
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
 
-class Credentials(private val user: User): UserDetails {
+open class Credentials(private val user: User): UserDetails {
 
     override fun getAuthorities() = mutableListOf<GrantedAuthority>()
 
