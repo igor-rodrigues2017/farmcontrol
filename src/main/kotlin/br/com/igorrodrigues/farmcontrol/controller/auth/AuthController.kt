@@ -1,11 +1,10 @@
-package br.com.igorrodrigues.farmcontrol.controller
+package br.com.igorrodrigues.farmcontrol.controller.auth
 
-import br.com.igorrodrigues.farmcontrol.domain.model.User
-import br.com.igorrodrigues.farmcontrol.domain.usecase.CreateUserUseCase
-import br.com.igorrodrigues.farmcontrol.domain.usecase.UserDto
+import br.com.igorrodrigues.farmcontrol.domain.model.user.User
+import br.com.igorrodrigues.farmcontrol.domain.usecase.user.CreateUserUseCase
+import br.com.igorrodrigues.farmcontrol.domain.usecase.user.UserDto
 import br.com.igorrodrigues.farmcontrol.infrastructure.security.TokenDto
 import br.com.igorrodrigues.farmcontrol.infrastructure.security.TokenService
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus.CREATED
 import org.springframework.http.HttpStatus.OK
 import org.springframework.http.MediaType.APPLICATION_JSON
@@ -19,14 +18,9 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-class AuthController {
-
-    @Autowired
-    private lateinit var createUserUseCase: CreateUserUseCase
-    @Autowired
-    private lateinit var authenticationManager: AuthenticationManager
-    @Autowired
-    private lateinit var tokenService: TokenService
+class AuthController(private val createUserUseCase: CreateUserUseCase,
+                     private val authenticationManager: AuthenticationManager,
+                     private val tokenService: TokenService) {
 
     @PostMapping("/signup")
     fun signin(@RequestBody userDto: UserDto): ResponseEntity<User> {
@@ -35,6 +29,7 @@ class AuthController {
             ResponseEntity
                 .status(CREATED)
                     .contentType(APPLICATION_JSON)
+            //TODO: Should return location instead body ??
                     .body(it)
         }
     }

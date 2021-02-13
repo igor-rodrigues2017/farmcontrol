@@ -1,6 +1,6 @@
 package br.com.igorrodrigues.farmcontrol.infrastructure.security
 
-import br.com.igorrodrigues.farmcontrol.domain.model.AllUser
+import br.com.igorrodrigues.farmcontrol.domain.model.user.AllUser
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.HttpMethod.GET

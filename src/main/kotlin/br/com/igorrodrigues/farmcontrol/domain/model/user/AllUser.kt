@@ -1,4 +1,4 @@
-package br.com.igorrodrigues.farmcontrol.domain.model
+package br.com.igorrodrigues.farmcontrol.domain.model.user
 
 interface AllUser {
     fun save(user: User): User

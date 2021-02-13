@@ -1,4 +1,4 @@
-package br.com.igorrodrigues.farmcontrol.domain.model
+package br.com.igorrodrigues.farmcontrol.domain.model.user
 
 import com.fasterxml.jackson.annotation.JsonIgnore
 import javax.persistence.*

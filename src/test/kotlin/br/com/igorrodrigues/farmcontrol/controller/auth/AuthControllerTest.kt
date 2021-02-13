@@ -1,12 +1,14 @@
-package br.com.igorrodrigues.farmcontrol.controller
+package br.com.igorrodrigues.farmcontrol.controller.auth
 
-import br.com.igorrodrigues.farmcontrol.domain.model.User
-import br.com.igorrodrigues.farmcontrol.domain.usecase.CreateUserUseCase
-import br.com.igorrodrigues.farmcontrol.domain.usecase.UserDto
+import br.com.igorrodrigues.farmcontrol.controller.ErrorDetail
+import br.com.igorrodrigues.farmcontrol.domain.model.user.User
+import br.com.igorrodrigues.farmcontrol.domain.usecase.user.CreateUserUseCase
+import br.com.igorrodrigues.farmcontrol.domain.usecase.user.UserDto
 import br.com.igorrodrigues.farmcontrol.infrastructure.security.TokenDto
 import br.com.igorrodrigues.farmcontrol.infrastructure.security.TokenService
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.nhaarman.mockitokotlin2.argumentCaptor
+import com.nhaarman.mockitokotlin2.whenever
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.Mockito.*
@@ -45,7 +47,7 @@ internal class AuthControllerTest {
     internal fun `should save a user and return user created with status 201`() {
         val userDto = UserDto("teste@test.com", "1234")
         val user = User(id = 1, email = "teste@test.com")
-        `when`(createUserUseCase.create(anyObject())).thenReturn(user)
+        whenever(createUserUseCase.create(anyObject())).thenReturn(user)
 
         mockMvc.post("/signup") {
             contentType = APPLICATION_JSON
@@ -62,7 +64,7 @@ internal class AuthControllerTest {
     @Test
     internal fun `should return status 422 when user already exists`() {
         val userDto = UserDto("existents@user.com", "1234")
-        `when`(createUserUseCase.create(anyObject())).thenThrow(CreateUserUseCase.UserAlreadyExistentException())
+        whenever(createUserUseCase.create(anyObject())).thenThrow(CreateUserUseCase.UserAlreadyExistentException())
         mockMvc.post("/signup") {
             contentType = APPLICATION_JSON
             content = jacksonObjectMapper().writeValueAsString(userDto)
@@ -78,7 +80,7 @@ internal class AuthControllerTest {
     internal fun `should return a new token`() {
         val userDto = UserDto("teste@test.com", "1234")
         val authentication = mock(Authentication::class.java)
-        `when`(authenticationManager.authenticate(UsernamePasswordAuthenticationToken(
+        whenever(authenticationManager.authenticate(UsernamePasswordAuthenticationToken(
                 userDto.email,
                 userDto.password
         ))).thenReturn(authentication)

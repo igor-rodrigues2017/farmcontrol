@@ -1,7 +1,7 @@
 package br.com.igorrodrigues.farmcontrol.infrastructure.persistence
 
-import br.com.igorrodrigues.farmcontrol.domain.model.User
-import br.com.igorrodrigues.farmcontrol.domain.model.UserNotFoundException
+import br.com.igorrodrigues.farmcontrol.domain.model.user.User
+import br.com.igorrodrigues.farmcontrol.domain.model.user.UserNotFoundException
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
