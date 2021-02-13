@@ -9,10 +9,10 @@ import br.com.igorrodrigues.farmcontrol.infrastructure.security.Credentials
 import br.com.igorrodrigues.farmcontrol.infrastructure.security.TokenService
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.nhaarman.mockitokotlin2.verify
+import com.nhaarman.mockitokotlin2.whenever
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
-import org.mockito.Mockito.`when`
 import org.mockito.junit.jupiter.MockitoExtension
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
@@ -48,9 +48,9 @@ internal class FarmControllerTest {
 
     @BeforeEach
     internal fun setup() {
-        `when`(allUser.withEmail("user@user.com")).thenReturn(aUser())
-        `when`(authenticate.principal).thenReturn(Credentials(aUser()))
-        `when`(createFarmUseCase.create(aFarm())).thenReturn(FARM_ID_CREATED)
+        whenever(allUser.withEmail("user@user.com")).thenReturn(aUser())
+        whenever(authenticate.principal).thenReturn(Credentials(aUser()))
+        whenever(createFarmUseCase.create(aFarm())).thenReturn(FARM_ID_CREATED)
     }
 
     @Test
