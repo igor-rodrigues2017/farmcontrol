@@ -1,6 +1,6 @@
 package br.com.igorrodrigues.farmcontrol.controller.auth
 
-import br.com.igorrodrigues.farmcontrol.domain.model.User
+import br.com.igorrodrigues.farmcontrol.domain.model.user.User
 import br.com.igorrodrigues.farmcontrol.domain.usecase.user.CreateUserUseCase
 import br.com.igorrodrigues.farmcontrol.domain.usecase.user.UserDto
 import br.com.igorrodrigues.farmcontrol.infrastructure.security.TokenDto
@@ -29,6 +29,7 @@ class AuthController(private val createUserUseCase: CreateUserUseCase,
             ResponseEntity
                 .status(CREATED)
                     .contentType(APPLICATION_JSON)
+            //TODO: Should return location instead body ??
                     .body(it)
         }
     }

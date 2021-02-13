@@ -1,6 +1,6 @@
 package br.com.igorrodrigues.farmcontrol.infrastructure.security
 
-import br.com.igorrodrigues.farmcontrol.domain.model.User
+import br.com.igorrodrigues.farmcontrol.domain.model.user.User
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
 

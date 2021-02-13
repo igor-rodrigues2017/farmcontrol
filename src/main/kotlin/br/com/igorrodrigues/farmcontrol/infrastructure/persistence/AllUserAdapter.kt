@@ -1,8 +1,8 @@
 package br.com.igorrodrigues.farmcontrol.infrastructure.persistence
 
-import br.com.igorrodrigues.farmcontrol.domain.model.AllUser
-import br.com.igorrodrigues.farmcontrol.domain.model.User
-import br.com.igorrodrigues.farmcontrol.domain.model.UserNotFoundException
+import br.com.igorrodrigues.farmcontrol.domain.model.user.AllUser
+import br.com.igorrodrigues.farmcontrol.domain.model.user.User
+import br.com.igorrodrigues.farmcontrol.domain.model.user.UserNotFoundException
 import org.springframework.stereotype.Repository
 
 @Repository

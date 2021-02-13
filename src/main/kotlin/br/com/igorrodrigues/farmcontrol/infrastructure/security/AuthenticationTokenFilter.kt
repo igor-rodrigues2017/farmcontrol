@@ -1,6 +1,6 @@
 package br.com.igorrodrigues.farmcontrol.infrastructure.security
 
-import br.com.igorrodrigues.farmcontrol.domain.model.AllUser
+import br.com.igorrodrigues.farmcontrol.domain.model.user.AllUser
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.web.filter.OncePerRequestFilter

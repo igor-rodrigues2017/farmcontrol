@@ -1,7 +1,7 @@
 package br.com.igorrodrigues.farmcontrol.infrastructure.security
 
-import br.com.igorrodrigues.farmcontrol.domain.model.AllUser
-import br.com.igorrodrigues.farmcontrol.domain.model.UserNotFoundException
+import br.com.igorrodrigues.farmcontrol.domain.model.user.AllUser
+import br.com.igorrodrigues.farmcontrol.domain.model.user.UserNotFoundException
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.stereotype.Service
 

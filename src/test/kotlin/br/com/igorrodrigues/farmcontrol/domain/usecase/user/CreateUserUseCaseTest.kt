@@ -1,8 +1,8 @@
 package br.com.igorrodrigues.farmcontrol.domain.usecase.user
 
-import br.com.igorrodrigues.farmcontrol.domain.model.AllUser
-import br.com.igorrodrigues.farmcontrol.domain.model.User
-import br.com.igorrodrigues.farmcontrol.domain.model.UserNotFoundException
+import br.com.igorrodrigues.farmcontrol.domain.model.user.AllUser
+import br.com.igorrodrigues.farmcontrol.domain.model.user.User
+import br.com.igorrodrigues.farmcontrol.domain.model.user.UserNotFoundException
 import com.nhaarman.mockitokotlin2.whenever
 import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.BeforeEach
