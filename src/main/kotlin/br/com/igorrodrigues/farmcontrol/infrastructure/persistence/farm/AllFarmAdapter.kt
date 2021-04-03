@@ -7,4 +7,8 @@ import org.springframework.stereotype.Repository
 @Repository
 class AllFarmAdapter(private val allFarmRepository: AllFarmRepository): AllFarm {
     override fun save(farm: Farm) = allFarmRepository.save(FarmData.from(farm)).toFarm()
+    override fun existing(): List<Farm> {
+        TODO("Not yet implemented")
+    }
+
 }

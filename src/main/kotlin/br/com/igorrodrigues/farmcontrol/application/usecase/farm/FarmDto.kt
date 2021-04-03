@@ -7,6 +7,7 @@ data class FarmDto(
     val farmName: String,
     val location: FarmLocationDto,
 ) {
+
     fun convertToFarm() =
             Farm(
                     farmName = farmName,
@@ -16,6 +17,17 @@ data class FarmDto(
                             country = location.country))
 
 
+    companion object {
+        fun convertFrom(farm: Farm): FarmDto {
+            return FarmDto(farmName = farm.farmName,
+                    location = farm.location?.let { farmLocation ->
+                        FarmLocationDto(
+                                city = farmLocation.city,
+                                state = farmLocation.state,
+                                country = farmLocation.country)
+                    }!!)
+        }
+    }
 }
 data class FarmLocationDto(
         val city: String,
