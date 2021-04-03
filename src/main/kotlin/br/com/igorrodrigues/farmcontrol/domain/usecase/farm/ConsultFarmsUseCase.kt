@@ -1,12 +1,15 @@
 package br.com.igorrodrigues.farmcontrol.domain.usecase.farm
 
+import br.com.igorrodrigues.farmcontrol.domain.model.farm.AllFarm
 import org.springframework.stereotype.Service
 
 @Service
-class ConsultFarmsUseCase {
+class ConsultFarmsUseCase (private val allFarm: AllFarm) {
 
-    fun existents(): List<FarmDto> {
-        TODO("Not yet implemented")
+    fun existing(): List<FarmDto> {
+       return allFarm.existing().map {
+           FarmDto.convertFrom(it)
+       }
     }
 
 }
