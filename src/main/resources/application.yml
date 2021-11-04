@@ -2,7 +2,7 @@ spring:
   #Config database
   datasource:
     plataform: postgres
-    url: jdbc:postgresql://postgres:5432/farm_control
+    url: jdbc:postgresql://localhost:5432/farm_control
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver
