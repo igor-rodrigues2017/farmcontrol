@@ -1,5 +1,7 @@
-package br.com.igorrodrigues.farmcontrol.infrastructure.persistence
+package br.com.igorrodrigues.farmcontrol.infrastructure.persistence.flyway
 
+import br.com.igorrodrigues.farmcontrol.infrastructure.persistence.config.TenantIdentifierResolver
+import br.com.igorrodrigues.farmcontrol.infrastructure.persistence.user.AllUserRepository
 import org.flywaydb.core.Flyway
 import org.springframework.boot.CommandLineRunner
 import org.springframework.context.annotation.Bean
@@ -22,8 +24,8 @@ class FlywayConfig {
 
     @Bean
     fun commandLineRunner(
-            allUser: AllUserRepository,
-            dataSource: DataSource,
+        allUser: AllUserRepository,
+        dataSource: DataSource,
     ): CommandLineRunner {
         return CommandLineRunner {
             allUser.findAll().forEach {

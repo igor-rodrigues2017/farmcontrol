@@ -1,4 +1,4 @@
-package br.com.igorrodrigues.farmcontrol.infrastructure.persistence
+package br.com.igorrodrigues.farmcontrol.infrastructure.persistence.config
 
 import br.com.igorrodrigues.farmcontrol.FarmcontrolApplication
 import org.hibernate.MultiTenancyStrategy

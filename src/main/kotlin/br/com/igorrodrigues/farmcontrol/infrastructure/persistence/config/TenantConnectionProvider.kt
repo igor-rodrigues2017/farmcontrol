@@ -1,4 +1,4 @@
-package br.com.igorrodrigues.farmcontrol.infrastructure.persistence
+package br.com.igorrodrigues.farmcontrol.infrastructure.persistence.config
 
 import org.hibernate.engine.jdbc.connections.spi.MultiTenantConnectionProvider
 import org.springframework.stereotype.Component

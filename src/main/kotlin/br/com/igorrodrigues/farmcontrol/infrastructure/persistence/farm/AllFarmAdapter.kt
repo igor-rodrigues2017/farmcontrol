@@ -1,4 +1,4 @@
-package br.com.igorrodrigues.farmcontrol.infrastructure.persistence
+package br.com.igorrodrigues.farmcontrol.infrastructure.persistence.farm
 
 import br.com.igorrodrigues.farmcontrol.domain.model.farm.AllFarm
 import br.com.igorrodrigues.farmcontrol.domain.model.farm.Farm

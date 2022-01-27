@@ -1,4 +1,4 @@
-package br.com.igorrodrigues.farmcontrol.infrastructure.persistence
+package br.com.igorrodrigues.farmcontrol.infrastructure.persistence.config
 
 import br.com.igorrodrigues.farmcontrol.domain.usecase.user.TenantService
 import org.flywaydb.core.Flyway

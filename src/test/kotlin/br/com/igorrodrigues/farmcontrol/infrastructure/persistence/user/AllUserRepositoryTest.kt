@@ -1,6 +1,7 @@
-package br.com.igorrodrigues.farmcontrol.infrastructure.persistence
+package br.com.igorrodrigues.farmcontrol.infrastructure.persistence.user
 
 import br.com.igorrodrigues.farmcontrol.domain.model.user.User
+import br.com.igorrodrigues.farmcontrol.infrastructure.persistence.user.AllUserRepository
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.equalTo
 import org.springframework.beans.factory.annotation.Autowired

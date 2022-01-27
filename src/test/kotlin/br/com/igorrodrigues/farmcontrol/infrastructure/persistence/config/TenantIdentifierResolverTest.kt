@@ -1,6 +1,7 @@
-package br.com.igorrodrigues.farmcontrol.infrastructure.persistence
+package br.com.igorrodrigues.farmcontrol.infrastructure.persistence.config
 
-import br.com.igorrodrigues.farmcontrol.infrastructure.persistence.TenantIdentifierResolver.Companion.DEFAULT_TENANT
+import br.com.igorrodrigues.farmcontrol.infrastructure.persistence.config.TenantIdentifierResolver
+import br.com.igorrodrigues.farmcontrol.infrastructure.persistence.config.TenantIdentifierResolver.Companion.DEFAULT_TENANT
 import br.com.igorrodrigues.farmcontrol.infrastructure.security.Credentials
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.mock
