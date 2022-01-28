@@ -2,42 +2,32 @@ package br.com.igorrodrigues.farmcontrol.infrastructure.persistence.user
 
 import br.com.igorrodrigues.farmcontrol.domain.model.user.User
 import br.com.igorrodrigues.farmcontrol.domain.model.user.UserNotFoundException
-import org.junit.jupiter.api.Assertions.*
-import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Test
-import org.mockito.Mock
-import org.mockito.Mockito.`when`
-import org.mockito.MockitoAnnotations
+import io.kotest.assertions.throwables.shouldThrow
+import io.kotest.core.spec.style.StringSpec
+import io.kotest.matchers.shouldBe
+import io.mockk.every
+import io.mockk.mockk
 
-internal class AllUserAdapterTest {
+const val EMAIL_NONEXISTENT = "nonexistent@email.com"
 
-    private val EMAIL_NONEXISTENT = "nonexistent@email.com"
-    @Mock
-    private lateinit var allUserRepository: AllUserRepository
+internal class AllUserAdapterTest : StringSpec({
 
-    @BeforeEach
-    internal fun setUp() {
-        MockitoAnnotations.openMocks(this)
-    }
+    val allUserRepository = mockk<AllUserRepository>()
 
-    @Test
-    internal fun `should thrown UserNotFoundException when looking for an email nonexistent`() {
-        `when`(allUserRepository.findByEmail(EMAIL_NONEXISTENT)).thenReturn(null)
-        assertThrows(UserNotFoundException::class.java) {
+    "should thrown UserNotFoundException when looking for an email nonexistent" {
+        every { allUserRepository.findByEmail(EMAIL_NONEXISTENT) } returns null
+        shouldThrow<UserNotFoundException> {
             AllUserAdapter(allUserRepository).withEmail(EMAIL_NONEXISTENT)
         }
     }
 
-    @Test
-    internal fun `should return false when looking for an email nonexistent`() {
-        `when`(allUserRepository.findByEmail(EMAIL_NONEXISTENT)).thenReturn(null)
-        assertFalse(AllUserAdapter(allUserRepository).userAlreadyExist(EMAIL_NONEXISTENT))
+    "should return false when looking for an email nonexistent" {
+        every { allUserRepository.findByEmail(EMAIL_NONEXISTENT) } returns null
+        AllUserAdapter(allUserRepository).userAlreadyExist(EMAIL_NONEXISTENT) shouldBe false
     }
 
-    @Test
-    internal fun `should return true when looking for an email existent`() {
-        val emailExistent = "existent@email.com"
-        `when`(allUserRepository.findByEmail(emailExistent)).thenReturn(User())
-        assertTrue(AllUserAdapter(allUserRepository).userAlreadyExist(emailExistent))
+    "should return true when looking for an email existent" {
+        every { allUserRepository.findByEmail("existent@email.com") } returns UserData()
+        AllUserAdapter(allUserRepository).userAlreadyExist("existent@email.com") shouldBe true
     }
-}
+})

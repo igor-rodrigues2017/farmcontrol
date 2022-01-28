@@ -34,6 +34,10 @@ dependencies {
     testImplementation("org.springframework.security:spring-security-test")
     testImplementation("com.h2database:h2:1.4.200")
     testImplementation("com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0")
+    testImplementation("io.kotest:kotest-runner-junit5:4.6.3")
+    testImplementation("io.kotest:kotest-assertions-core:4.6.3")
+    testImplementation("io.kotest:kotest-framework-datatest:4.6.3")
+    testImplementation("io.mockk:mockk:1.12.2")
 }
 
 tasks.withType<Test> {
