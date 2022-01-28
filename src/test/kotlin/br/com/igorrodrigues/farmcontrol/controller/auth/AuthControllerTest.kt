@@ -56,7 +56,7 @@ internal class AuthControllerTest {
         }.andExpect {
             status { isCreated() }
             content { contentType(APPLICATION_JSON) }
-            content { json(jacksonObjectMapper().writeValueAsString(user)) }
+            content { json(jacksonObjectMapper().writeValueAsString(UserCreatedDto(id = user.id, email = user.email))) }
         }
         verify(createUserUseCase).create(argumentCaptor<UserDto>().capture())
     }
