@@ -1,4 +1,4 @@
-package br.com.igorrodrigues.farmcontrol.domain.usecase.farm
+package br.com.igorrodrigues.farmcontrol.application.usecase.farm
 
 import br.com.igorrodrigues.farmcontrol.domain.model.farm.AllFarm
 import org.springframework.stereotype.Service

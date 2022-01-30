@@ -1,4 +1,4 @@
-package br.com.igorrodrigues.farmcontrol.domain.usecase.user
+package br.com.igorrodrigues.farmcontrol.application.usecase.user
 
 data class UserDto(
         val email: String = "",

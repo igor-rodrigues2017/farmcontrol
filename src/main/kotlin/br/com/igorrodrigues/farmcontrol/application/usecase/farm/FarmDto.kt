@@ -1,11 +1,11 @@
-package br.com.igorrodrigues.farmcontrol.domain.usecase.farm
+package br.com.igorrodrigues.farmcontrol.application.usecase.farm
 
 import br.com.igorrodrigues.farmcontrol.domain.model.farm.Farm
 import br.com.igorrodrigues.farmcontrol.domain.model.farm.FarmLocation
 
 data class FarmDto(
-        val farmName: String,
-        val location: FarmLocationDto,
+    val farmName: String,
+    val location: FarmLocationDto,
 ) {
     fun convertToFarm() =
             Farm(
