@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository
 
 @Repository
 class AllFarmAdapter(private val allFarmRepository: AllFarmRepository): AllFarm {
-    override fun save(farm: Farm) = allFarmRepository.save(farm)
+    override fun save(farm: Farm) = allFarmRepository.save(FarmData.from(farm)).toFarm()
 }
