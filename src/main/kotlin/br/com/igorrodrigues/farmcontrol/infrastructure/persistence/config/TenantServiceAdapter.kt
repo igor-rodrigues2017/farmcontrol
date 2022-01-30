@@ -1,6 +1,6 @@
 package br.com.igorrodrigues.farmcontrol.infrastructure.persistence.config
 
-import br.com.igorrodrigues.farmcontrol.application.usecase.user.TenantService
+import br.com.igorrodrigues.farmcontrol.infrastructure.persistence.user.TenantService
 import org.flywaydb.core.Flyway
 import org.springframework.stereotype.Component
 import javax.sql.DataSource

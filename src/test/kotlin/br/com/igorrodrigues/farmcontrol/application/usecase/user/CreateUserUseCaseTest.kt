@@ -19,9 +19,6 @@ class CreateUserUseCaseTest {
     @Mock
     private lateinit var allUser: AllUser
 
-    @Mock
-    private lateinit var tenantService: TenantService
-
     private lateinit var useCase: CreateUserUseCase
 
     @BeforeEach
@@ -33,7 +30,7 @@ class CreateUserUseCaseTest {
                 email = EMAIL,
                 password = PASSWORD
         ))
-        useCase = CreateUserUseCase(allUser, tenantService)
+        useCase = CreateUserUseCase(allUser)
     }
 
     @Test
@@ -51,7 +48,6 @@ class CreateUserUseCaseTest {
                 password = "1234"
             )
         )
-        verify(tenantService).initDatabase(EMAIL)
     }
 
     @Test

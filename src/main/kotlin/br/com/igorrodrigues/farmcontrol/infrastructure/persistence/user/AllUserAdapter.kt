@@ -6,9 +6,11 @@ import br.com.igorrodrigues.farmcontrol.domain.model.user.UserNotFoundException
 import org.springframework.stereotype.Repository
 
 @Repository
-class AllUserAdapter(private val repository: AllUserRepository) : AllUser {
+class AllUserAdapter(private val repository: AllUserRepository, val tenantService: TenantService) : AllUser {
     override fun save(user: User): User {
         val userDataSaved = repository.save(UserData.from(user))
+        //TODO: MELHOR VER SE AQUI É UM BOM LUGAR E FAZER TESTES
+        tenantService.initDatabase(userDataSaved.email)
         return userDataSaved.toUser()
     }
 
