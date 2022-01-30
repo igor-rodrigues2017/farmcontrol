@@ -1,7 +1,7 @@
 package br.com.igorrodrigues.farmcontrol.controller.auth
 
-import br.com.igorrodrigues.farmcontrol.domain.usecase.user.CreateUserUseCase
-import br.com.igorrodrigues.farmcontrol.domain.usecase.user.UserDto
+import br.com.igorrodrigues.farmcontrol.application.usecase.user.CreateUserUseCase
+import br.com.igorrodrigues.farmcontrol.application.usecase.user.UserDto
 import br.com.igorrodrigues.farmcontrol.infrastructure.security.TokenDto
 import br.com.igorrodrigues.farmcontrol.infrastructure.security.TokenService
 import org.springframework.http.HttpStatus.CREATED

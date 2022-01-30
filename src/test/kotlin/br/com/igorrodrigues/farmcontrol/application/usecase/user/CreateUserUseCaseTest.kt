@@ -1,4 +1,4 @@
-package br.com.igorrodrigues.farmcontrol.domain.usecase.user
+package br.com.igorrodrigues.farmcontrol.application.usecase.user
 
 import br.com.igorrodrigues.farmcontrol.domain.model.user.AllUser
 import br.com.igorrodrigues.farmcontrol.domain.model.user.User
@@ -38,15 +38,19 @@ class CreateUserUseCaseTest {
 
     @Test
     fun `should persist a new user and create a new schema for this user`() {
-        useCase.create(UserDto(
+        useCase.create(
+            UserDto(
                 EMAIL,
                 PASSWORD
-        ))
+            )
+        )
 
-        verify(allUser).save(User(
+        verify(allUser).save(
+            User(
                 email = EMAIL,
                 password = "1234"
-        ))
+            )
+        )
         verify(tenantService).initDatabase(EMAIL)
     }
 

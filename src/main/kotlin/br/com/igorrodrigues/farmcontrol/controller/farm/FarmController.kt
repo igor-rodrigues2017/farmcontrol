@@ -1,7 +1,7 @@
 package br.com.igorrodrigues.farmcontrol.controller.farm
 
-import br.com.igorrodrigues.farmcontrol.domain.usecase.farm.CreateFarmUseCase
-import br.com.igorrodrigues.farmcontrol.domain.usecase.farm.FarmDto
+import br.com.igorrodrigues.farmcontrol.application.usecase.farm.CreateFarmUseCase
+import br.com.igorrodrigues.farmcontrol.application.usecase.farm.FarmDto
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody

@@ -1,10 +1,10 @@
 package br.com.igorrodrigues.farmcontrol.controller.farm
 
+import br.com.igorrodrigues.farmcontrol.application.usecase.farm.CreateFarmUseCase
+import br.com.igorrodrigues.farmcontrol.application.usecase.farm.FarmDto
+import br.com.igorrodrigues.farmcontrol.application.usecase.farm.FarmLocationDto
 import br.com.igorrodrigues.farmcontrol.domain.model.user.AllUser
 import br.com.igorrodrigues.farmcontrol.domain.model.user.User
-import br.com.igorrodrigues.farmcontrol.domain.usecase.farm.CreateFarmUseCase
-import br.com.igorrodrigues.farmcontrol.domain.usecase.farm.FarmDto
-import br.com.igorrodrigues.farmcontrol.domain.usecase.farm.FarmLocationDto
 import br.com.igorrodrigues.farmcontrol.infrastructure.security.Credentials
 import br.com.igorrodrigues.farmcontrol.infrastructure.security.TokenService
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
@@ -69,10 +69,14 @@ internal class FarmControllerTest {
 
     private fun aJsonFarm() = jacksonObjectMapper().writeValueAsString(aFarm())
 
-    private fun aFarm() = FarmDto("Farm One",
-            FarmLocationDto(city = "Floresta Azul",
-                    state = "BA",
-                    country = "Brazil"))
+    private fun aFarm() = FarmDto(
+        "Farm One",
+        FarmLocationDto(
+            city = "Floresta Azul",
+            state = "BA",
+            country = "Brazil"
+        )
+    )
 
     private fun aUser() = User(email = "user@user.com",
             password = "1234",

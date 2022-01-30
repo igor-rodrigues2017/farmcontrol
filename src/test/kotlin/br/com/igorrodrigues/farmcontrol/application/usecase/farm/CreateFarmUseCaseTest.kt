@@ -1,4 +1,4 @@
-package br.com.igorrodrigues.farmcontrol.domain.usecase.farm
+package br.com.igorrodrigues.farmcontrol.application.usecase.farm
 
 import br.com.igorrodrigues.farmcontrol.domain.model.farm.AllFarm
 import br.com.igorrodrigues.farmcontrol.domain.model.farm.Farm
@@ -30,10 +30,14 @@ internal class CreateFarmUseCaseTest {
     }
 
     private fun aFarmDto() =
-            FarmDto("Farm One",
-                    FarmLocationDto("Floresta Azul",
-                            "BA",
-                            "Brazil"))
+        FarmDto(
+            "Farm One",
+            FarmLocationDto(
+                "Floresta Azul",
+                "BA",
+                "Brazil"
+            )
+        )
 
     private fun aFarm() = Farm(
             farmName = "Farm One",
