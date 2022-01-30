@@ -4,23 +4,22 @@ import br.com.igorrodrigues.farmcontrol.domain.model.user.User
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
 
+private const val EMAIL = "iguin@teste.com"
+
+private const val PASSWORD = "*12345*"
+
+val aUser = User(email = EMAIL, password = PASSWORD)
+
+val aUserData = UserData(email = EMAIL, password = PASSWORD)
+
 class UserDataTest : StringSpec({
 
     "should create a UserData from User" {
-        val user = User(email = "iguin@teste.com", password = "*12345*")
-        UserData.from(user) shouldBe UserData(email = user.email, password = user.password)
+        UserData.from(aUser) shouldBe aUserData
     }
 
     "should create a User from UserData" {
-        UserData(
-            id = 10,
-            email = "iguin@teste.com",
-            password = "*12345*"
-        ).toUser() shouldBe User(
-            id = 10,
-            email = "iguin@teste.com",
-            password = "*12345*"
-        )
+        aUserData.toUser() shouldBe aUser
     }
 
 })
