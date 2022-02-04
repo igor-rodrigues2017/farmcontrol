@@ -18,8 +18,8 @@ spring:
   #Dev-tools
   devtools:
     restart:
-      poll-interval: 20s
-      quiet-period: 10s
+      poll-interval: 2s
+      quiet-period: 1s
 
 #JWT
 jwt:
