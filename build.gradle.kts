@@ -6,6 +6,7 @@ plugins {
     kotlin("jvm") version "1.4.10"
     kotlin("plugin.spring") version "1.4.10"
     kotlin("plugin.jpa") version "1.4.10"
+    jacoco
 }
 
 group = "br.com.igorrodrigues"
@@ -29,7 +30,6 @@ dependencies {
     implementation("org.flywaydb:flyway-core:7.5.2")
     implementation("org.postgresql:postgresql:42.3.1")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
-//    runtimeOnly("org.postgresql:postgresql")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.security:spring-security-test")
     testImplementation("com.h2database:h2:1.4.200")
@@ -42,6 +42,43 @@ dependencies {
 
 tasks.withType<Test> {
     useJUnitPlatform()
+}
+
+tasks.jacocoTestReport {
+    reports {
+        xml.isEnabled = false
+        csv.isEnabled = false
+        html.isEnabled = true
+        html.destination = file("$buildDir/reports/coverage")
+    }
+}
+
+tasks.jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            limit {
+                minimum = "0.80".toBigDecimal()
+            }
+        }
+    }
+}
+
+val testCoverage by tasks.registering {
+    group = "verification"
+    description = "Runs the unit tests with coverage."
+
+    dependsOn(":test", ":jacocoTestReport", ":jacocoTestCoverageVerification")
+    val jacocoTestReport = tasks.findByName("jacocoTestReport")
+    jacocoTestReport?.mustRunAfter(tasks.findByName("test"))
+    tasks.findByName("jacocoTestCoverageVerification")?.mustRunAfter(jacocoTestReport)
+}
+
+tasks.test {
+    finalizedBy(testCoverage)
+}
+
+tasks.jacocoTestReport {
+    dependsOn(tasks.test)
 }
 
 tasks.withType<KotlinCompile> {
