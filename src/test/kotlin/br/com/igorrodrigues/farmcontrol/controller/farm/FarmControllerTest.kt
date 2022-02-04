@@ -1,13 +1,11 @@
 package br.com.igorrodrigues.farmcontrol.controller.farm
 
+import br.com.igorrodrigues.farmcontrol.application.usecase.farm.ConsultFarmsUseCase
 import br.com.igorrodrigues.farmcontrol.application.usecase.farm.CreateFarmUseCase
 import br.com.igorrodrigues.farmcontrol.application.usecase.farm.FarmDto
 import br.com.igorrodrigues.farmcontrol.application.usecase.farm.FarmLocationDto
 import br.com.igorrodrigues.farmcontrol.domain.model.user.AllUser
 import br.com.igorrodrigues.farmcontrol.domain.model.user.User
-import br.com.igorrodrigues.farmcontrol.domain.usecase.farm.CreateFarmUseCase
-import br.com.igorrodrigues.farmcontrol.domain.usecase.farm.FarmDto
-import br.com.igorrodrigues.farmcontrol.domain.usecase.farm.FarmLocationDto
 import br.com.igorrodrigues.farmcontrol.infrastructure.security.Credentials
 import br.com.igorrodrigues.farmcontrol.infrastructure.security.TokenService
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
@@ -25,6 +23,7 @@ import org.springframework.http.MediaType.APPLICATION_JSON
 import org.springframework.security.core.Authentication
 import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.springframework.test.web.servlet.MockMvc
+import org.springframework.test.web.servlet.get
 import org.springframework.test.web.servlet.post
 
 @AutoConfigureMockMvc
@@ -46,9 +45,11 @@ internal class FarmControllerTest {
     @MockBean
     private lateinit var allUser: AllUser
 
-    @MockBean private lateinit var createFarmUseCase: CreateFarmUseCase
+    @MockBean
+    private lateinit var createFarmUseCase: CreateFarmUseCase
 
-    @MockBean private lateinit var consultFarmsUseCase: ConsultFarmsUseCase
+    @MockBean
+    private lateinit var consultFarmsUseCase: ConsultFarmsUseCase
 
     @BeforeEach
     internal fun setup() {
@@ -97,7 +98,9 @@ internal class FarmControllerTest {
         )
     )
 
-    private fun aUser() = User(email = "user@user.com",
-            password = "1234",
-            id = 1)
+    private fun aUser() = User(
+        email = "user@user.com",
+        password = "1234",
+        id = 1
+    )
 }
