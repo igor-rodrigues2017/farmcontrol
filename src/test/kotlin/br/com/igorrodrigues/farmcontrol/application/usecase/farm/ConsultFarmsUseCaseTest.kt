@@ -3,35 +3,28 @@ package br.com.igorrodrigues.farmcontrol.application.usecase.farm
 import br.com.igorrodrigues.farmcontrol.domain.model.farm.AllFarm
 import br.com.igorrodrigues.farmcontrol.domain.model.farm.Farm
 import br.com.igorrodrigues.farmcontrol.domain.model.farm.FarmLocation
-import com.nhaarman.mockitokotlin2.whenever
-import org.junit.jupiter.api.Assertions.assertIterableEquals
-import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Test
-import org.mockito.Mock
-import org.mockito.MockitoAnnotations.openMocks
+import io.kotest.core.spec.style.StringSpec
+import io.kotest.matchers.shouldBe
+import io.mockk.every
+import io.mockk.mockk
 
-internal class ConsultFarmsUseCaseTest {
+internal class ConsultFarmsUseCaseTest : StringSpec({
 
-    @Mock private lateinit var allFarm: AllFarm
+    val aFarm = Farm(
+        id = 1,
+        farmName = "Fazenda 1",
+        location = FarmLocation(
+            city = "Floresta Azul",
+            state = "BA",
+            country = "Brasil"
+        )
+    )
 
-    @BeforeEach
-    internal fun setUp() {
-        openMocks(this)
+    "should return all existent farms" {
+        val allFarm = mockk<AllFarm>()
+        every { allFarm.existing() } returns listOf(aFarm)
+
+        ConsultFarmsUseCase(allFarm).existences() shouldBe listOf(FarmDto.convertFrom(aFarm))
     }
 
-    @Test
-    internal fun should_return_all_existents_farms() {
-        whenever(allFarm.existing()).thenReturn(listOf(aFarm()))
-
-        val farmExisting = ConsultFarmsUseCase(allFarm).existing()
-
-        assertIterableEquals(listOf(FarmDto.convertFrom(aFarm())), farmExisting)
-    }
-
-    private fun aFarm() = Farm(id = 1,
-            farmName = "Fazenda 1",
-            location = FarmLocation(city = "Floresta Azul",
-                    state = "BA",
-                    country = "Brasil"))
-
-}
+})

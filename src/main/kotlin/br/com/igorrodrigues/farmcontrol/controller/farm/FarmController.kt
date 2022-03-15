@@ -25,7 +25,7 @@ class FarmController(
 
     @GetMapping
     fun consultFarms(): ResponseEntity<List<FarmDto>> {
-        return consultFarmsUseCase.existing().let {
+        return consultFarmsUseCase.existences().let {
             ResponseEntity.ok(it)
         }
     }

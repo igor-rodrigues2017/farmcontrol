@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service
 @Service
 class ConsultFarmsUseCase(private val allFarm: AllFarm) {
 
-    fun existing(): List<FarmDto> {
+    fun existences(): List<FarmDto> {
         return allFarm.existing().map {
             FarmDto.convertFrom(it)
         }

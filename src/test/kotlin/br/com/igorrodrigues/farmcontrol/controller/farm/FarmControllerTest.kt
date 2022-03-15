@@ -56,7 +56,7 @@ internal class FarmControllerTest {
         whenever(allUser.withEmail("user@user.com")).thenReturn(aUser())
         whenever(authenticate.principal).thenReturn(Credentials(aUser()))
         whenever(createFarmUseCase.create(aFarm())).thenReturn(FARM_ID_CREATED)
-        whenever(consultFarmsUseCase.existing()).thenReturn(listOf(aFarm()))
+        whenever(consultFarmsUseCase.existences()).thenReturn(listOf(aFarm()))
     }
 
     @Test
@@ -82,7 +82,7 @@ internal class FarmControllerTest {
             content { contentType(APPLICATION_JSON) }
             content { json(aJsonFarmList()) }
         }
-        verify(consultFarmsUseCase).existing()
+        verify(consultFarmsUseCase).existences()
     }
 
     private fun aJsonFarm() = jacksonObjectMapper().writeValueAsString(aFarm())
