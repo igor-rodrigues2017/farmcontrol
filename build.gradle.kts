@@ -44,6 +44,10 @@ tasks.withType<Test> {
     useJUnitPlatform()
 }
 
+jacoco {
+    toolVersion = "0.8.7"
+}
+
 tasks.jacocoTestReport {
     reports {
         xml.isEnabled = false

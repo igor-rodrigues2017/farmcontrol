@@ -1,5 +1,6 @@
 package br.com.igorrodrigues.farmcontrol.controller.farm
 
+import br.com.igorrodrigues.farmcontrol.application.usecase.farm.ConsultFarmsUseCase
 import br.com.igorrodrigues.farmcontrol.application.usecase.farm.CreateFarmUseCase
 import br.com.igorrodrigues.farmcontrol.application.usecase.farm.FarmDto
 import br.com.igorrodrigues.farmcontrol.application.usecase.farm.FarmLocationDto
@@ -22,6 +23,7 @@ import org.springframework.http.MediaType.APPLICATION_JSON
 import org.springframework.security.core.Authentication
 import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.springframework.test.web.servlet.MockMvc
+import org.springframework.test.web.servlet.get
 import org.springframework.test.web.servlet.post
 
 @AutoConfigureMockMvc
@@ -46,11 +48,15 @@ internal class FarmControllerTest {
     @MockBean
     private lateinit var createFarmUseCase: CreateFarmUseCase
 
+    @MockBean
+    private lateinit var consultFarmsUseCase: ConsultFarmsUseCase
+
     @BeforeEach
     internal fun setup() {
         whenever(allUser.withEmail("user@user.com")).thenReturn(aUser())
         whenever(authenticate.principal).thenReturn(Credentials(aUser()))
         whenever(createFarmUseCase.create(aFarm())).thenReturn(FARM_ID_CREATED)
+        whenever(consultFarmsUseCase.existences()).thenReturn(listOf(aFarm()))
     }
 
     @Test
@@ -67,7 +73,21 @@ internal class FarmControllerTest {
         verify(createFarmUseCase).create(aFarm())
     }
 
+    @Test
+    internal fun `should consult all farms`() {
+        mockMvc.get("/farms") {
+            header("Authorization", tokenService.generateToken(authenticate).toString())
+        }.andExpect {
+            status { isOk() }
+            content { contentType(APPLICATION_JSON) }
+            content { json(aJsonFarmList()) }
+        }
+        verify(consultFarmsUseCase).existences()
+    }
+
     private fun aJsonFarm() = jacksonObjectMapper().writeValueAsString(aFarm())
+
+    private fun aJsonFarmList() = jacksonObjectMapper().writeValueAsString(listOf(aFarm()))
 
     private fun aFarm() = FarmDto(
         "Farm One",
@@ -78,7 +98,9 @@ internal class FarmControllerTest {
         )
     )
 
-    private fun aUser() = User(email = "user@user.com",
-            password = "1234",
-            id = 1)
+    private fun aUser() = User(
+        email = "user@user.com",
+        password = "1234",
+        id = 1
+    )
 }
